@@ -17,9 +17,9 @@
           <h2>Présentation</h2>
           <p>
             Je m’appelle Baptiste Jemain, j’ai actuellement 16 ans et je
-            souhaite travailler dans l’intelligence artificielle. Sur mon temps
-            libre j’ai appris le développement web par plaisir mais maintenant
-            j’aimerais créer de vrais sites. J’utilise principalement le
+            souhaite travailler dans l’intelligence artificielle. J’ai appris le
+            développement web par plaisir mais maintenant j’aimerais créer de
+            vrais sites sur mon temps libre. J’utilise principalement le
             framework javascript Vue.js avec le sur-framework Nuxt.js.
           </p>
         </div>
