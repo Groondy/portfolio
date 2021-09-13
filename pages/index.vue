@@ -59,7 +59,7 @@
         class="separation-left"
       />
     </section>
-    <section class="contact">
+    <section class="contact" v-if="load === true">
       <div class="contact-content">
         <h2>Contact</h2>
         <form class="contact-form" @submit.prevent="sendEmail">
@@ -69,6 +69,14 @@
           </div>
           <input type="email" name="email" placeholder="email" required />
           <textarea name="message" placeholder="Message" required></textarea>
+          <label class="remarque">Remarque</label>
+          <input
+            class="remarque"
+            name="remarque"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            placeholder="nom@domaine.com"
+            v-model="antispam"
+          />
           <input type="submit" value="envoyer" id="btn-contact" />
         </form>
       </div>
@@ -84,27 +92,31 @@ init(process.env.USER_ID);
 export default {
   data() {
     return {
-      title: " "
+      title: " ",
+      antispam: "",
+      load: false
     };
   },
   methods: {
     sendEmail(e) {
-      emailjs
-        .sendForm(
-          process.env.SERVICE_ID,
-          process.env.TEMPLATE_ID,
-          e.target,
-          process.env.USER_ID
-        )
-        .then(document.querySelector("form").reset())
-        .then(
-          () => {
-            alert("Mail envoyé");
-          },
-          () => {
-            alert("Une erreur est survenue");
-          }
-        );
+      if (this.antispam === "") {
+        emailjs
+          .sendForm(
+            process.env.SERVICE_ID,
+            process.env.TEMPLATE_ID,
+            e.target,
+            process.env.USER_ID
+          )
+          .then(document.querySelector("form").reset())
+          .then(
+            () => {
+              alert("Mail envoyé");
+            },
+            () => {
+              alert("Une erreur est survenue");
+            }
+          );
+      }
     },
     updateTitle(baseTitle) {
       this.title = baseTitle.join("");
@@ -134,6 +146,7 @@ export default {
 
   mounted() {
     this.setTitle();
+    this.load = true;
   }
 };
 </script>
@@ -304,6 +317,10 @@ export default {
           &:hover {
             background-color: $secondary-color-hover;
           }
+        }
+
+        .remarque {
+          display: none;
         }
       }
     }
