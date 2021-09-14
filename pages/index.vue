@@ -69,14 +69,7 @@
           </div>
           <input type="email" name="email" placeholder="email" required />
           <textarea name="message" placeholder="Message" required></textarea>
-          <label class="remarque">Remarque</label>
-          <input
-            class="remarque"
-            name="remarque"
-            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-            placeholder="nom@domaine.com"
-            v-model="antispam"
-          />
+          <recaptcha />
           <input type="submit" value="envoyer" id="btn-contact" />
         </form>
       </div>
@@ -98,9 +91,11 @@ export default {
     };
   },
   methods: {
-    sendEmail(e) {
-      if (this.antispam === "") {
-        emailjs
+    async sendEmail(e) {
+      try {
+        const token = await this.$recaptcha.getResponse();
+
+        await emailjs
           .sendForm(
             process.env.SERVICE_ID,
             process.env.TEMPLATE_ID,
@@ -116,6 +111,10 @@ export default {
               alert("Une erreur est survenue");
             }
           );
+
+        await this.$recaptcha.reset();
+      } catch (err) {
+        console.log(err);
       }
     },
     updateTitle(baseTitle) {

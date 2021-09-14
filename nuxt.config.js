@@ -6,7 +6,7 @@ export default {
   head: {
     title: "portfolio",
     htmlAttrs: {
-      lang: "en"
+      lang: "fr"
     },
     meta: [
       { charset: "utf-8" },
@@ -30,9 +30,15 @@ export default {
   buildModules: ["@nuxtjs/dotenv", "@nuxtjs/google-fonts"],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/style-resources"],
+  modules: ["@nuxtjs/style-resources", "@nuxtjs/recaptcha"],
   styleResources: {
     scss: ["./assets/style/*.scss"]
+  },
+
+  recaptcha: {
+    size: "normal",
+    siteKey: process.env.SITE_KEY,
+    version: 2
   },
 
   googleFonts: {
