@@ -159,6 +159,7 @@ export default {
     background-color: $primary-color;
     height: 100vh;
     min-height: 100vh;
+    min-height: 400px;
     width: 100%;
     position: relative;
     @include flex-row-center-center;
@@ -443,11 +444,19 @@ export default {
 }
 @media screen and (max-width: 425px) {
   .index {
+    .main {
+      &-content {
+        h1 {
+          letter-spacing: 0.3rem;
+          font-size: $font-23;
+        }
+      }
+    }
     .presentation {
       &-content {
         .text {
           h2 {
-            font-size: $font-10;
+            font-size: $font-9;
           }
           p {
             font-size: $font-4;
