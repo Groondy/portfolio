@@ -31,7 +31,7 @@ html, body {
 }
 body {
 	line-height: 1;
-	background-color: #1F2933;
+	background-color: #151F29;
 	font-family: 'Roboto Mono', monospace;
 	letter-spacing: 0.3rem;
 }
@@ -49,4 +49,8 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+p {
+	font-family: 'Roboto', sans-serif;
 }

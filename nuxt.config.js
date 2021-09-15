@@ -43,7 +43,8 @@ export default {
 
   googleFonts: {
     families: {
-      "Roboto Mono": [500]
+      "Roboto Mono": [500],
+      Roboto: [500]
     }
   },
 

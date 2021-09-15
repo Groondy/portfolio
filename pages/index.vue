@@ -462,6 +462,10 @@ export default {
             font-size: $font-4;
           }
         }
+
+        .img-and-technos {
+          width: 90%;
+        }
       }
     }
     .contact {
