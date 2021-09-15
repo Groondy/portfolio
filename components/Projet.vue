@@ -1,9 +1,16 @@
 <template>
-  <div class="projet"></div>
+  <div class="projet">
+    <nuxt-link :to="`/${link}`" class="projet-content">
+      <img :src="require(`@/assets/img/${img}`)" alt="projet" />
+      <h3>{{ text }}</h3>
+    </nuxt-link>
+  </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["link", "img", "text"]
+};
 </script>
 
 <style lang="scss" scoped>
@@ -12,5 +19,49 @@ export default {};
   height: 200px;
   background-color: #c4c4c4;
   margin: 10px;
+  border: 3px #dddddd solid;
+  position: relative;
+
+  a {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    display: block;
+
+    img {
+      width: 100%;
+      height: auto;
+      transition: 0.6s ease;
+    }
+
+    h3 {
+      z-index: 10;
+      font-size: $font-13;
+      position: absolute;
+      text-align: center;
+      width: 80%;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, 100px);
+      transition: 0.6s ease;
+      opacity: 0;
+      letter-spacing: 0.1rem;
+      line-height: 150%;
+    }
+  }
+
+  &:hover {
+    a {
+      img {
+        transform: scale(1.15);
+        filter: opacity(10%) contrast(150%);
+      }
+      h3 {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+      }
+    }
+  }
 }
 </style>

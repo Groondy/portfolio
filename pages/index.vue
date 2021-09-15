@@ -30,11 +30,11 @@
             class="me-img"
           />
           <ul>
-            <li><Logo img="logoVue.png" /></li>
+            <li><Logo img="logoVue.webp" /></li>
             <li><Logo img="nuxtjs.svg" /></li>
-            <li><Logo img="nodejs.png" /></li>
-            <li><Logo img="sass.png" /></li>
-            <li><Logo img="mysql.png" /></li>
+            <li><Logo img="nodejs.webp" /></li>
+            <li><Logo img="sass.webp" /></li>
+            <li><Logo img="mysql.webp" /></li>
           </ul>
         </div>
       </div>
@@ -48,9 +48,20 @@
       <div class="projets-content">
         <h2>Projets</h2>
         <ul>
-          <li><Projet /></li>
-          <li><Projet /></li>
-          <li><Projet /></li>
+          <li>
+            <Projet
+              link="portfolio"
+              img="projetPortfolio.webp"
+              text="Portfolio"
+            />
+          </li>
+          <li>
+            <Projet
+              link="e-commerce"
+              img="projetECommerce.webp"
+              text="E-commerce"
+            />
+          </li>
         </ul>
       </div>
       <img
@@ -313,6 +324,7 @@ export default {
           margin-top: 2.5vw;
           border: 0;
           transition: 0.4s ease-in-out;
+          cursor: pointer;
 
           &:hover {
             background-color: $secondary-color-hover;
