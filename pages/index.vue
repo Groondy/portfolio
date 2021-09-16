@@ -16,11 +16,11 @@
         <div class="text">
           <h2>Présentation</h2>
           <p>
-            Je m’appelle Baptiste Jemain, j’ai actuellement 16 ans et je
-            souhaite travailler dans l’intelligence artificielle. J’ai appris le
-            développement web par plaisir mais maintenant j’aimerais créer de
-            vrais sites sur mon temps libre. J’utilise principalement le
-            framework javascript Vue.js avec le sur-framework Nuxt.js.
+            Je suis Baptiste, j’ai actuellement 16 ans et je souhaite travailler
+            dans l’intelligence artificielle. J’ai appris le développement web
+            par plaisir mais maintenant j’aimerais créer de vrais sites sur mon
+            temps libre. J’utilise principalement le framework javascript Vue.js
+            avec le sur-framework Nuxt.js.
           </p>
         </div>
         <div class="img-and-technos">
@@ -48,19 +48,15 @@
       <div class="projets-content">
         <h2>Projets</h2>
         <ul>
+          <a href="virtualhart.fr" target="_blank">
+            <li>
+              <Projet img="projetPortfolio.webp" text="Portfolio" />
+            </li>
+          </a>
           <li>
-            <Projet
-              link="portfolio"
-              img="projetPortfolio.webp"
-              text="Portfolio"
-            />
-          </li>
-          <li>
-            <Projet
-              link="e-commerce"
-              img="projetECommerce.webp"
-              text="E-commerce"
-            />
+            <a href="https://projet-e-commerce-57835.web.app/" target="_blank">
+              <Projet img="projetECommerce.webp" text="E-commerce" />
+            </a>
           </li>
         </ul>
       </div>
@@ -223,7 +219,7 @@ export default {
         p {
           font-size: $font-6;
           text-align: justify;
-          line-height: 130%;
+          line-height: 140%;
         }
       }
 
@@ -312,6 +308,7 @@ export default {
           width: 100.3%;
           min-height: 250px;
           font-size: $font-10;
+          margin-bottom: 40px;
         }
 
         input[type="submit"] {

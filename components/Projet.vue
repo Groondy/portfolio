@@ -1,15 +1,15 @@
 <template>
   <div class="projet">
-    <nuxt-link :to="`/${link}`" class="projet-content">
+    <div class="projet-content">
       <img :src="require(`@/assets/img/${img}`)" alt="projet" />
       <h3>{{ text }}</h3>
-    </nuxt-link>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["link", "img", "text"]
+  props: ["img", "text"]
 };
 </script>
 
@@ -22,12 +22,13 @@ export default {
   border: 3px #dddddd solid;
   position: relative;
 
-  a {
+  .projet-content {
     width: 100%;
     height: 100%;
     position: relative;
     overflow: hidden;
     display: block;
+    color: black;
 
     img {
       width: 100%;
@@ -52,7 +53,7 @@ export default {
   }
 
   &:hover {
-    a {
+    .projet-content {
       img {
         transform: scale(1.15);
         filter: opacity(10%) contrast(150%);
