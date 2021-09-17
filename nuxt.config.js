@@ -21,7 +21,7 @@ export default {
   css: ["./assets/style/index.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: "~/plugins/sal.js", mode: "client" }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -30,7 +30,7 @@ export default {
   buildModules: ["@nuxtjs/dotenv", "@nuxtjs/google-fonts"],
 
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: ["@nuxtjs/style-resources", "@nuxtjs/recaptcha"],
+  modules: ["@nuxtjs/style-resources", "@nuxtjs/recaptcha", "@nuxtjs/toast"],
   styleResources: {
     scss: ["./assets/style/*.scss"]
   },
@@ -46,6 +46,20 @@ export default {
       "Roboto Mono": [500],
       Roboto: [500]
     }
+  },
+
+  toast: {
+    position: "top-right",
+    register: [
+      {
+        name: "mailSend",
+        message: "Mail envoyé",
+        options: {
+          type: "info",
+          duration: 5000
+        }
+      }
+    ]
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

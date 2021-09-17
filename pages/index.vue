@@ -13,14 +13,19 @@
     </section>
     <section class="presentation">
       <div class="presentation-content">
-        <div class="text">
+        <div
+          class="text"
+          data-sal="slide-right"
+          data-sal-duration="800"
+          data-sal-easing="ease-out"
+        >
           <h2>Présentation</h2>
           <p>
-            Je suis Baptiste, j’ai actuellement 16 ans et je souhaite travailler
-            dans l’intelligence artificielle. J’ai appris le développement web
-            par plaisir mais maintenant j’aimerais créer de vrais sites sur mon
-            temps libre. J’utilise principalement le framework javascript Vue.js
-            avec le sur-framework Nuxt.js.
+            Je suis Baptiste, j’ai 16 ans et je souhaite travailler dans
+            l’intelligence artificielle. J’ai appris le développement web par
+            plaisir mais maintenant j’aimerais créer des sites sur mon temps
+            libre. J’utilise principalement le framework javascript Vue.js avec
+            le sur-framework Nuxt.js.
           </p>
         </div>
         <div class="img-and-technos">
@@ -46,7 +51,13 @@
     </section>
     <section class="projets">
       <div class="projets-content">
-        <h2>Projets</h2>
+        <h2
+          data-sal="slide-left"
+          data-sal-duration="800"
+          data-sal-easing="ease-out"
+        >
+          Projets
+        </h2>
         <ul>
           <a href="virtualhart.fr" target="_blank">
             <li>
@@ -66,9 +77,15 @@
         class="separation-left"
       />
     </section>
-    <section class="contact" v-if="load === true">
+    <section class="contact">
       <div class="contact-content">
-        <h2>Contact</h2>
+        <h2
+          data-sal="slide-right"
+          data-sal-duration="800"
+          data-sal-easing="ease-out"
+        >
+          Contact
+        </h2>
         <form class="contact-form" @submit.prevent="sendEmail">
           <div class="name">
             <input type="text" name="nom" placeholder="Nom" required />
@@ -81,6 +98,7 @@
         </form>
       </div>
     </section>
+    <footer></footer>
   </div>
 </template>
 
@@ -93,14 +111,13 @@ export default {
   data() {
     return {
       title: " ",
-      antispam: "",
-      load: false
+      antispam: ""
     };
   },
   methods: {
     async sendEmail(e) {
       try {
-        const token = await this.$recaptcha.getResponse();
+        await this.$recaptcha.getResponse();
 
         await emailjs
           .sendForm(
@@ -109,15 +126,8 @@ export default {
             e.target,
             process.env.USER_ID
           )
-          .then(document.querySelector("form").reset())
-          .then(
-            () => {
-              alert("Mail envoyé");
-            },
-            () => {
-              alert("Une erreur est survenue");
-            }
-          );
+          .then(this.$toast.global.mailSend())
+          .then(document.querySelector("form").reset());
 
         await this.$recaptcha.reset();
       } catch (err) {
@@ -152,7 +162,6 @@ export default {
 
   mounted() {
     this.setTitle();
-    this.load = true;
   }
 };
 </script>
@@ -166,7 +175,7 @@ export default {
     background-color: $primary-color;
     height: 100vh;
     min-height: 100vh;
-    min-height: 400px;
+    min-height: 675px;
     width: 100%;
     position: relative;
     @include flex-row-center-center;
@@ -273,7 +282,7 @@ export default {
     position: relative;
     width: 100vw;
     padding-top: 10vw;
-    padding-bottom: 12vw;
+    padding-bottom: 8vw;
     @include flex-row-center-center;
     &-content {
       @include flex-column-around-center;
@@ -350,6 +359,12 @@ export default {
     width: 100vw;
     height: auto;
     transform: rotate(180deg);
+  }
+
+  footer {
+    width: 100%;
+    height: 350px;
+    background-color: $primary-color;
   }
 }
 
@@ -468,7 +483,7 @@ export default {
             font-size: $font-9;
           }
           p {
-            font-size: $font-4;
+            font-size: $font-6;
           }
         }
 
