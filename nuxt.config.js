@@ -31,7 +31,11 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ["@nuxtjs/dotenv", "@nuxtjs/google-fonts"],
+  buildModules: [
+    "@nuxtjs/dotenv",
+    "@nuxtjs/google-fonts",
+    "@nuxtjs/google-analytics"
+  ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxtjs/style-resources", "@nuxtjs/recaptcha", "@nuxtjs/toast"],
@@ -64,6 +68,10 @@ export default {
         }
       }
     ]
+  },
+
+  googleAnalytics: {
+    id: process.env.ANALYTICS_ID
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

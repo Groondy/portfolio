@@ -3,7 +3,9 @@
     <section class="main">
       <div class="main-content">
         <img src="@/assets/img/logo.svg" alt="virtual hart" class="logo" />
-        <h1>{{ title }}</h1>
+        <h1>
+          VIRTUAL HART
+        </h1>
       </div>
       <img
         src="@/assets/img/separation.svg"
@@ -16,12 +18,12 @@
         <div
           class="text"
           data-sal="slide-right"
-          data-sal-duration="800"
+          data-sal-duration="1500"
           data-sal-easing="ease-out"
         >
           <h2>Présentation</h2>
           <p>
-            Je suis Baptiste, j’ai 16 ans et je souhaite travailler dans
+            Je suis Baptiste, je suis au lycée et je souhaite travailler dans
             l’intelligence artificielle. J’ai appris le<strong>
               développement web </strong
             >par plaisir mais maintenant j’aimerais créer des sites sur mon
@@ -31,11 +33,13 @@
           </p>
         </div>
         <div class="img-and-technos">
-          <img
-            src="@/assets/img/dessinMoi.png"
-            alt="virtual hart"
-            class="me-img"
-          />
+          <div class="desktop">
+            <img
+              src="@/assets/img/desktop.svg"
+              alt="desktop"
+              class="desktop-content"
+            />
+          </div>
           <ul>
             <li><Logo img="logoVue.webp" /></li>
             <li><Logo img="nuxtjs.svg" /></li>
@@ -144,12 +148,6 @@ import { init } from "emailjs-com";
 init(process.env.USER_ID);
 
 export default {
-  data() {
-    return {
-      title: " ",
-      antispam: ""
-    };
-  },
   methods: {
     async sendEmail(e) {
       try {
@@ -169,35 +167,7 @@ export default {
       } catch (err) {
         console.log(err);
       }
-    },
-    updateTitle(baseTitle) {
-      this.title = baseTitle.join("");
-    },
-    setTitle() {
-      const finishTitle = ["VIRTUAL HART"];
-      const baseTitle = [];
-      let letterIndex = 0;
-      let self = this;
-
-      function loop() {
-        setTimeout(function() {
-          if (letterIndex < finishTitle[0].length) {
-            baseTitle.push(finishTitle[0][letterIndex]);
-            self.updateTitle(baseTitle);
-            letterIndex++;
-            loop();
-          }
-        }, 150);
-      }
-
-      setTimeout(function() {
-        loop();
-      }, 200);
     }
-  },
-
-  mounted() {
-    this.setTitle();
   }
 };
 </script>
@@ -225,18 +195,6 @@ export default {
         font-size: $font-46;
         letter-spacing: 0.7rem;
         text-align: center;
-        position: relative;
-        &::after {
-          content: "";
-          position: absolute;
-          height: 6rem;
-          width: 5px;
-          background-color: #fff;
-          top: 10px;
-          transform: translateY(-4px);
-          right: -20px;
-          animation: anim 1s linear infinite;
-        }
       }
     }
   }
@@ -269,17 +227,25 @@ export default {
       }
 
       .img-and-technos {
-        width: 60%;
-        @include flex-row-around-start;
+        width: 100%;
+        @include flex-row-center-start;
 
-        .me-img {
-          width: 300px;
-          height: 400px;
+        .desktop {
+          width: 400px;
           background-color: #fff;
+          padding: 25px;
+          border-radius: 5px;
+          transform: skew(3deg);
+
+          img {
+            width: 100%;
+            transform: skew(-3deg);
+          }
         }
 
         ul {
           margin-top: 10px;
+          margin-left: 40px;
           @include flex-row-center-center;
           flex-wrap: wrap;
           max-width: 400px;
@@ -372,10 +338,6 @@ export default {
             background-color: $secondary-color-hover;
           }
         }
-
-        .remarque {
-          display: none;
-        }
       }
     }
   }
@@ -452,9 +414,6 @@ export default {
         h1 {
           font-size: $font-36;
           letter-spacing: 0.5rem;
-          &::after {
-            height: 4.5rem;
-          }
         }
       }
     }
@@ -474,8 +433,11 @@ export default {
 
         .img-and-technos {
           @include flex-column-between-center;
-          .me-img {
-            margin-bottom: 3vw;
+          .desktop {
+            margin-bottom: 10vw;
+          }
+          ul {
+            margin-left: 0;
           }
         }
       }
@@ -552,6 +514,12 @@ export default {
             text-align: center;
           }
         }
+
+        .img-and-technos {
+          .desktop {
+            width: 75vw;
+          }
+        }
       }
     }
   }
@@ -607,15 +575,6 @@ export default {
         }
       }
     }
-  }
-}
-
-@keyframes anim {
-  50% {
-    opacity: 0.1;
-  }
-  100% {
-    opacity: 1;
   }
 }
 </style>
