@@ -326,7 +326,7 @@ export default {
           background-color: $secondary-color;
           color: #fff;
           font-size: $font-9;
-          width: 170px;
+          width: 240px;
           height: 50px;
           letter-spacing: 0.3rem;
           margin-top: 2.5vw;
@@ -336,6 +336,7 @@ export default {
 
           &:hover {
             background-color: $secondary-color-hover;
+            transform: scale(1.05);
           }
         }
       }
