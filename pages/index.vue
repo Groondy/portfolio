@@ -22,10 +22,12 @@
           <h2>Présentation</h2>
           <p>
             Je suis Baptiste, j’ai 16 ans et je souhaite travailler dans
-            l’intelligence artificielle. J’ai appris le développement web par
-            plaisir mais maintenant j’aimerais créer des sites sur mon temps
-            libre. J’utilise principalement le framework javascript Vue.js avec
-            le sur-framework Nuxt.js.
+            l’intelligence artificielle. J’ai appris le<strong>
+              développement web </strong
+            >par plaisir mais maintenant j’aimerais créer des sites sur mon
+            temps libre. J’utilise principalement le framework javascript<strong>
+              Vue.js </strong
+            >avec le sur-framework <strong>Nuxt.js</strong>.
           </p>
         </div>
         <div class="img-and-technos">
@@ -98,7 +100,41 @@
         </form>
       </div>
     </section>
-    <footer></footer>
+    <footer>
+      <div class="footer-content">
+        <div class="links">
+          <h3>Liens:</h3>
+          <ul>
+            <li>
+              <a
+                href="https://www.facebook.com/baptiste.jemain.52/"
+                target="_blank"
+                >Facebook</a
+              >
+            </li>
+            <li>
+              <a href="https://github.com/Groondy" target="_blank">Github</a>
+            </li>
+            <li>baptiste.jemain@gmail.com</li>
+            <li>
+              <a
+                href="https://www.linkedin.com/in/baptiste-jemain-2ab768220/"
+                target="_blank"
+                >Linkedin</a
+              >
+            </li>
+          </ul>
+        </div>
+        <div class="services">
+          <h3>Services proposés:</h3>
+          <ul>
+            <li>création site internet à Nantes</li>
+            <li>optimisation du référencement</li>
+            <li>création du design d'une marque</li>
+          </ul>
+        </div>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -344,6 +380,48 @@ export default {
     }
   }
 
+  footer {
+    width: 100%;
+    height: 250px;
+    background-color: $primary-color;
+    @include flex-row-center-start;
+
+    .footer-content {
+      width: 90%;
+      height: 70%;
+      @include flex-row-around-start;
+      margin-top: 50px;
+      letter-spacing: 0.2rem;
+      .links {
+        h3 {
+          font-size: $font-8;
+          margin-bottom: 20px;
+          margin-left: -30px;
+        }
+        li {
+          margin-top: 10px;
+          font-size: $font-5;
+          a {
+            color: white;
+          }
+        }
+      }
+
+      .services {
+        h3 {
+          font-size: $font-8;
+          margin-bottom: 20px;
+          margin-left: -30px;
+        }
+
+        li {
+          margin-top: 10px;
+          font-size: $font-4;
+        }
+      }
+    }
+  }
+
   .separation-left {
     position: absolute;
     top: 100%;
@@ -359,12 +437,6 @@ export default {
     width: 100vw;
     height: auto;
     transform: rotate(180deg);
-  }
-
-  footer {
-    width: 100%;
-    height: 350px;
-    background-color: $primary-color;
   }
 }
 
@@ -434,6 +506,24 @@ export default {
         }
       }
     }
+
+    footer {
+      height: 500px;
+      @include flex-column-start-center;
+      .footer-content {
+        @include flex-column-between-center;
+        .links {
+          h3 {
+            margin-left: 0;
+          }
+        }
+        .services {
+          h3 {
+            margin-left: 0;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -497,6 +587,23 @@ export default {
         width: 85%;
         h2 {
           margin-bottom: 6vw;
+        }
+      }
+    }
+
+    footer {
+      text-align: center;
+
+      .footer-content {
+        .links {
+          h3 {
+            font-size: $font-7;
+          }
+        }
+        .services {
+          h3 {
+            font-size: $font-7;
+          }
         }
       }
     }
