@@ -43,9 +43,9 @@
           <ul>
             <li><Logo img="logoVue.webp" /></li>
             <li><Logo img="nuxtjs.svg" /></li>
-            <li><Logo img="nodejs.webp" /></li>
+            <li><Logo img="figma.webp" /></li>
             <li><Logo img="sass.webp" /></li>
-            <li><Logo img="mysql.webp" /></li>
+            <li><Logo img="tailwind.webp" /></li>
           </ul>
         </div>
       </div>
