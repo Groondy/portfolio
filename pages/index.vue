@@ -139,6 +139,18 @@
         </div>
       </div>
     </footer>
+    <div class="cookies">
+      <div class="cookies-content" v-if="open">
+        <p class="text">Voulez vous activer les cookies ?</p>
+        <div class="btn-container">
+          <div class="btn yes" @click="updateCookiesYes"><p>oui</p></div>
+          <div class="btn no" @click="updateCookiesNo"><p>non</p></div>
+        </div>
+      </div>
+      <div class="close">
+        <img src="@/assets/img/close.svg" alt="croix" @click="toggleCookies" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -148,25 +160,62 @@ import { init } from "emailjs-com";
 init(process.env.USER_ID);
 
 export default {
+  data() {
+    return {
+      cookies: false,
+      open: false
+    };
+  },
+
   methods: {
     async sendEmail(e) {
-      try {
-        await this.$recaptcha.getResponse();
+      if (this.cookies) {
+        try {
+          await this.$recaptcha.getResponse();
 
-        await emailjs
-          .sendForm(
-            process.env.SERVICE_ID,
-            process.env.TEMPLATE_ID,
-            e.target,
-            process.env.USER_ID
-          )
-          .then(this.$toast.global.mailSend())
-          .then(document.querySelector("form").reset());
+          await emailjs
+            .sendForm(
+              process.env.SERVICE_ID,
+              process.env.TEMPLATE_ID,
+              e.target,
+              process.env.USER_ID
+            )
+            .then(this.$toast.global.mailSend())
+            .then(document.querySelector("form").reset());
 
-        await this.$recaptcha.reset();
-      } catch (err) {
-        console.log(err);
+          await this.$recaptcha.reset();
+        } catch (err) {
+          console.log(err);
+        }
+      } else {
+        this.$toast.global.nocoockies();
       }
+    },
+    updateCookiesYes() {
+      this.cookies = true;
+      window.localStorage.setItem("cookies", true);
+      this.open = false;
+    },
+    updateCookiesNo() {
+      this.cookies = false;
+      window.localStorage.setItem("cookies", false);
+      this.open = false;
+    },
+    toggleCookies() {
+      if (this.open === true) {
+        this.open = false;
+      } else {
+        this.open = true;
+      }
+    }
+  },
+  mounted() {
+    if (process.client) {
+      setTimeout(() => {
+        this.open = true;
+      }, 2000);
+      localStorage.setItem("cookies", false);
+      this.cookies = localStorage.getItem("cookies");
     }
   }
 };
@@ -401,6 +450,68 @@ export default {
     height: auto;
     transform: rotate(180deg);
   }
+  .cookies {
+    position: fixed;
+    bottom: 50px;
+    left: 60px;
+
+    &-content {
+      background-color: #fff;
+      border-radius: 5px;
+      position: relative;
+      bottom: 10px;
+      left: 50px;
+      border: 2px solid black;
+
+      .text {
+        color: black;
+        padding: 15px;
+        letter-spacing: 0.1rem;
+      }
+
+      .btn-container {
+        @include flex-row-between-center;
+        border-top: 2px solid black;
+        color: black;
+
+        .btn {
+          width: 50%;
+          height: 100%;
+          @include flex-row-center-center;
+          cursor: pointer;
+          padding: 10px 0;
+        }
+
+        .yes {
+          border-right: 2px solid black;
+          transition: 0.3s;
+          &:hover {
+            background-color: #34d399;
+          }
+        }
+        .no {
+          transition: 0.3s;
+
+          &:hover {
+            background-color: #ef4444;
+          }
+        }
+      }
+    }
+
+    .close {
+      width: 50px;
+      height: 50px;
+      background-color: $secondary-color;
+      border-radius: 100%;
+      display: flex;
+
+      img {
+        margin: auto;
+        width: 70%;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 950px) {
@@ -522,6 +633,12 @@ export default {
           }
         }
       }
+    }
+  }
+
+  .cookies {
+    &-content {
+      margin-left: -111.5px;
     }
   }
 }

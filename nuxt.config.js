@@ -66,12 +66,28 @@ export default {
           type: "info",
           duration: 5000
         }
+      },
+      {
+        name: "nocoockies",
+        message: "Merci d'accepter les cookies",
+        options: {
+          type: "info",
+          duration: 5000
+        }
       }
     ]
   },
 
   googleAnalytics: {
-    id: process.env.ANALYTICS_ID
+    id: () => {
+      if (process.client) {
+        if (localStorage.getItem("cookies")) {
+          return process.env.ANALYTICS_ID;
+        } else {
+          return false;
+        }
+      }
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
