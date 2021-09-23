@@ -359,7 +359,6 @@ export default {
 
           &:hover {
             background-color: $secondary-color-hover;
-            transform: scale(1.05);
           }
         }
       }

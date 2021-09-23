@@ -54,7 +54,7 @@ export default {
   position: fixed;
   bottom: 25px;
   left: 50%;
-  min-width: 1000px;
+  min-width: 330px;
   transform: translateX(-50%);
   @include flex-column-between-center;
 
@@ -64,8 +64,10 @@ export default {
     border: 2px solid black;
     margin-bottom: 10px;
     opacity: 0;
+    visibility: hidden;
+    max-height: 1px;
     transition: 0.5s ease-in-out;
-    transform: translateX(200px);
+    transform: translateY(200px);
 
     .text {
       color: black;
@@ -118,7 +120,9 @@ export default {
 
   .isopen {
     opacity: 1;
-    transform: translateX(0);
+    visibility: visible;
+    transform: translateY(0);
+    max-height: 100px;
   }
 }
 </style>
