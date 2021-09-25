@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="close">
-      <img src="@/assets/img/cookies.svg" alt="cookie" @click="toggleCookies" />
+      <img src="~/assets/img/cookies.svg" alt="cookie" @click="toggleCookies" />
     </div>
   </div>
 </template>

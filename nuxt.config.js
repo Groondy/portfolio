@@ -25,17 +25,16 @@ export default {
   css: ["./assets/style/index.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [{ src: "~/plugins/sal.js", mode: "client" }],
+  plugins: [
+    { src: "~/plugins/sal.js", mode: "client" },
+    { src: "./plugins/gtag.js", mode: "client" }
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    "@nuxtjs/dotenv",
-    "@nuxtjs/google-fonts",
-    "@nuxtjs/google-analytics"
-  ],
+  buildModules: ["@nuxtjs/dotenv", "@nuxtjs/google-fonts"],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: ["@nuxtjs/style-resources", "@nuxtjs/recaptcha", "@nuxtjs/toast"],
@@ -76,18 +75,6 @@ export default {
         }
       }
     ]
-  },
-
-  googleAnalytics: {
-    id: () => {
-      if (process.client) {
-        if (localStorage.getItem("cookies")) {
-          return process.env.ANALYTICS_ID;
-        } else {
-          return false;
-        }
-      }
-    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build

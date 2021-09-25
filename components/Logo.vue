@@ -1,6 +1,6 @@
 <template>
   <div class="logo" @mouseover="anim">
-    <img :src="require(`@/assets/img/${img}`)" alt="logo techno" />
+    <img :src="require(`~/assets/img/${img}`)" alt="logo techno" />
   </div>
 </template>
 

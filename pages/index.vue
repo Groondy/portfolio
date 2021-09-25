@@ -2,13 +2,13 @@
   <div class="index">
     <section class="main">
       <div class="main-content">
-        <img src="@/assets/img/logo.svg" alt="virtual hart" class="logo" />
+        <img src="~/assets/img/logo.svg" alt="virtual hart" class="logo" />
         <h1>
           VIRTUAL HART
         </h1>
       </div>
       <img
-        src="@/assets/img/separation.svg"
+        src="~/assets/img/separation.svg"
         alt="separation"
         class="separation-left"
       />
@@ -35,7 +35,7 @@
         <div class="img-and-technos">
           <div class="desktop">
             <img
-              src="@/assets/img/desktop.svg"
+              src="~/assets/img/desktop.svg"
               alt="desktop"
               class="desktop-content"
             />
@@ -50,7 +50,7 @@
         </div>
       </div>
       <img
-        src="@/assets/img/separation.svg"
+        src="~/assets/img/separation.svg"
         alt="separation"
         class="separation-right"
       />
@@ -78,7 +78,7 @@
         </ul>
       </div>
       <img
-        src="@/assets/img/separation.svg"
+        src="~/assets/img/separation.svg"
         alt="separation"
         class="separation-left"
       />
@@ -182,14 +182,14 @@ export default {
     updateCookies(payload) {
       this.cookies = payload;
       if (process.client) {
-        localStorage.setItem("cookies", payload);
+        localStorage.setItem("RGPD:accepted", payload);
       }
     }
   },
 
   mounted() {
     if (process.client) {
-      localStorage.setItem("cookies", false);
+      localStorage.removeItem("RGPD:accepted");
     }
   }
 };
