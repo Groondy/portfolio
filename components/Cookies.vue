@@ -7,13 +7,14 @@
         <div class="btn no" @click="updateCookiesNo"><p>non</p></div>
       </div>
     </div>
-    <div class="close">
-      <img src="~/assets/img/cookies.svg" alt="cookie" @click="toggleCookies" />
+    <div class="close" @click="toggleOpen">
+      <img src="~/assets/img/cookies.svg" alt="cookie" />
     </div>
   </div>
 </template>
 
 <script>
+import { bootstrap } from "vue-gtag";
 export default {
   data() {
     return {
@@ -26,14 +27,20 @@ export default {
     updateCookiesYes() {
       this.cookies = true;
       this.open = false;
-      this.$emit("updateCookies", this.cookies);
+      if (process.browser) {
+        bootstrap().then(gtag => {
+          localStorage.setItem("RGPD:accepted", true);
+        });
+      }
     },
     updateCookiesNo() {
       this.cookies = false;
       this.open = false;
-      this.$emit("updateCookies", this.cookies);
+      if (process.browser) {
+        localStorage.setItem("RGPD:accepted", false);
+      }
     },
-    toggleCookies() {
+    toggleOpen() {
       if (this.open === true) {
         this.open = false;
       } else {
@@ -63,8 +70,6 @@ export default {
     border-radius: 5px;
     border: 2px solid black;
     margin-bottom: 10px;
-    opacity: 0;
-    visibility: hidden;
     max-height: 1px;
     transition: 0.5s ease-in-out;
     transform: translateY(200px);
@@ -111,6 +116,7 @@ export default {
     background-color: $secondary-color;
     border-radius: 100%;
     display: flex;
+    cursor: pointer;
 
     img {
       margin: auto;
@@ -119,8 +125,6 @@ export default {
   }
 
   .isopen {
-    opacity: 1;
-    visibility: visible;
     transform: translateY(0);
     max-height: 100px;
   }

@@ -1,18 +1,21 @@
 import Vue from "vue";
 import VueGtag from "vue-gtag";
 
-Vue.use(VueGtag, {
-  config: { id: process.env.ANALYTICS_ID },
-  appName: "virtual hart",
-  enabled: () => {
-    const rgpd = localStorage.getItem("RGPD:accepted");
+export default ({ app }) => {
+  const RGPD = localStorage.getItem("RGPD:accepted");
 
-    if (typeof rgpd !== null && rgpd === false) {
-      return false;
-    }
-    if (typeof rgpd !== null && rgpd === true) {
-      return true;
-    }
-    return false;
-  }
-});
+  Vue.use(
+    VueGtag,
+    {
+      config: { id: "G-PYGC3EBYSB" },
+      appName: "Virtual hart",
+      pageTrackerScreenviewEnabled: true,
+      bootstrap: RGPD == "true",
+      enabled: RGPD == "true",
+      params: {
+        anonymize_ip: true
+      }
+    },
+    app.router
+  );
+};

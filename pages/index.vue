@@ -65,13 +65,17 @@
           Projets
         </h2>
         <ul>
-          <a href="virtualhart.fr" target="_blank">
+          <a href="virtualhart.fr" target="_blank" rel="nofollow">
             <li>
               <Projet img="projetPortfolio.webp" text="Portfolio" />
             </li>
           </a>
           <li>
-            <a href="https://projet-e-commerce-57835.web.app/" target="_blank">
+            <a
+              href="https://projet-e-commerce-57835.web.app/"
+              target="_blank"
+              rel="nofollow"
+            >
               <Projet img="projetECommerce.webp" text="E-commerce" />
             </a>
           </li>
@@ -92,15 +96,22 @@
         >
           Contact
         </h2>
-        <form class="contact-form" @submit.prevent="sendEmail">
+        <form
+          class="contact-form"
+          method="POST"
+          data-netlify="true"
+          name="contact"
+          action="/"
+        >
+          <input type="hidden" name="form-name" value="contact" />
           <div class="name">
             <input type="text" name="nom" placeholder="Nom" required />
             <input type="text" name="prenom" placeholder="Prénom" required />
           </div>
-          <input type="email" name="email" placeholder="email" required />
+          <input type="email" name="email" placeholder="Email" required />
           <textarea name="message" placeholder="Message" required></textarea>
-          <recaptcha />
-          <input type="submit" value="envoyer" id="btn-contact" />
+
+          <button type="submit">envoyer</button>
         </form>
       </div>
     </section>
@@ -113,17 +124,24 @@
               <a
                 href="https://www.facebook.com/baptiste.jemain.52/"
                 target="_blank"
+                rel="nofollow"
                 >Facebook</a
               >
             </li>
             <li>
-              <a href="https://github.com/Groondy" target="_blank">Github</a>
+              <a
+                href="https://github.com/Groondy"
+                target="_blank"
+                rel="nofollow"
+                >Github</a
+              >
             </li>
             <li>baptiste.jemain@gmail.com</li>
             <li>
               <a
                 href="https://www.linkedin.com/in/baptiste-jemain-2ab768220/"
                 target="_blank"
+                rel="nofollow"
                 >Linkedin</a
               >
             </li>
@@ -139,60 +157,12 @@
         </div>
       </div>
     </footer>
-    <Cookies @updateCookies="updateCookies" />
+    <Cookies />
   </div>
 </template>
 
 <script>
-import emailjs from "emailjs-com";
-import { init } from "emailjs-com";
-init(process.env.USER_ID);
-
-export default {
-  data() {
-    return {
-      cookies: false
-    };
-  },
-
-  methods: {
-    async sendEmail(e) {
-      if (this.cookies) {
-        try {
-          await this.$recaptcha.getResponse();
-
-          await emailjs
-            .sendForm(
-              process.env.SERVICE_ID,
-              process.env.TEMPLATE_ID,
-              e.target,
-              process.env.USER_ID
-            )
-            .then(this.$toast.global.mailSend())
-            .then(document.querySelector("form").reset());
-
-          await this.$recaptcha.reset();
-        } catch (err) {
-          console.log(err);
-        }
-      } else {
-        this.$toast.global.nocoockies();
-      }
-    },
-    updateCookies(payload) {
-      this.cookies = payload;
-      if (process.client) {
-        localStorage.setItem("RGPD:accepted", payload);
-      }
-    }
-  },
-
-  mounted() {
-    if (process.client) {
-      localStorage.removeItem("RGPD:accepted");
-    }
-  }
-};
+export default {};
 </script>
 
 <style lang="scss">
@@ -345,7 +315,7 @@ export default {
           margin-bottom: 40px;
         }
 
-        input[type="submit"] {
+        button[type="submit"] {
           background-color: $secondary-color;
           color: #fff;
           font-size: $font-9;
@@ -361,6 +331,10 @@ export default {
             background-color: $secondary-color-hover;
           }
         }
+      }
+
+      .hidden {
+        display: none;
       }
     }
   }
